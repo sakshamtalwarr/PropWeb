@@ -50,12 +50,26 @@ export default function App() {
       @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
       .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
 
-      @media print {
+            @media print {
+        @page { size: portrait; margin: 10mm; }
+        body { background-color: white !important; margin: 0; padding: 0; }
         body * { visibility: hidden; }
         #certificate-area, #certificate-area * { visibility: visible; }
-        #certificate-area { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 20px; }
+        #certificate-area { 
+          position: absolute; 
+          left: 0; 
+          top: 0; 
+          width: 100%; 
+          margin: 0; 
+          padding: 20px; 
+          page-break-inside: avoid;
+          break-inside: avoid;
+          transform: scale(0.85); /* Shrinks it slightly to fit perfectly on 1 page */
+          transform-origin: top center;
+        }
         .no-print { display: none !important; }
       }
+
     `;
     document.head.appendChild(style);
     return () => document.head.removeChild(style);
