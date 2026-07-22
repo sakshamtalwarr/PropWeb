@@ -50,26 +50,56 @@ export default function App() {
       @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
       .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
 
-            @media print {
-        @page { size: portrait; margin: 10mm; }
-        body { background-color: white !important; margin: 0; padding: 0; }
-        body * { visibility: hidden; }
-        #certificate-area, #certificate-area * { visibility: visible; }
-        #certificate-area { 
-          position: absolute; 
-          left: 0; 
-          top: 0; 
-          width: 100%; 
-          margin: 0; 
-          padding: 20px; 
-          page-break-inside: avoid;
-          break-inside: avoid;
-          transform: scale(0.85); /* Shrinks it slightly to fit perfectly on 1 page */
-          transform-origin: top center;
-        }
-        .no-print { display: none !important; }
-      }
+      @media print {
 
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #certificate-area,
+  #certificate-area * {
+    visibility: visible !important;
+  }
+
+  #certificate-area {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+
+    left: 0 !important;
+    top: 0 !important;
+
+    margin: 0 auto !important;
+    padding: 12mm !important;
+
+    border-width: 10px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    transform: none !important;
+    overflow: hidden !important;
+
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .no-print {
+    display: none !important; 
+  }
+}
     `;
     document.head.appendChild(style);
     return () => document.head.removeChild(style);
